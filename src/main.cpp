@@ -10,7 +10,8 @@
 
 Adafruit_SSD1306 display(WIDTH, HEIGHT, &Wire, -1);//创建一个Adafruit_SSD1306对象，命名为display，使用之前定义的宽度、高度、I2C对象和复位引脚
 //在setup函数中初始化串口通信、I2C通信和OLED显示屏，并在显示屏上显示"Hello ESP32"文本
-void setup() {
+void setup() 
+{
   Serial.begin(115200);//初始化串口通信，设置波特率为115200
   Wire.begin(SDA_PIN, SCL_PIN);//初始化I2C通信，指定数据引脚和时钟引脚
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))//初始化OLED显示屏，使用内部电源和I2C地址0x3C，如果初始化失败则进入死循环
