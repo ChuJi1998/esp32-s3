@@ -9,7 +9,7 @@
 #define SDA_PIN 12
 
 Adafruit_SSD1306 display(WIDTH, HEIGHT, &Wire, -1);
-
+//初始化显示屏对象，参数分别为宽度、高度、I2C对象和复位引脚（-1表示不使用复位引脚）
 void setup() {
   Serial.begin(115200);
   Wire.begin(SDA_PIN, SCL_PIN);
