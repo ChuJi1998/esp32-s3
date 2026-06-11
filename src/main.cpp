@@ -18,15 +18,15 @@ void setup()
   {
     while(1);
   }
-  display.clearDisplay();//清空显示屏
-  display.setTextSize(1);//设置文本大小为1
+  display.setTextSize(2);//设置文本大小为2倍
   display.setTextColor(WHITE);//设置文本颜色为白色
-  display.setCursor(0,10);//设置文本光标位置为(0,10)
-  display.println("Hello ESP32");//在显示屏上打印"Hello ESP32"文本
-  display.display();//将缓冲区的内容显示在屏幕上
 }
 
 void loop()//主循环函数为空，因为我们只需要在setup函数中显示文本一次
 {
-  
+  display.clearDisplay();//清空显示屏
+  display.setCursor(0,10);//设置文本光标位置为(0,10)
+  display.println("Hello\nDu zhengming");//在显示屏上打印"Hello\nDu zhengming"文本
+  display.display();//更新显示屏以显示新的内容
+  delay(500);//等待2秒钟
 }
