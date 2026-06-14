@@ -1,0 +1,61 @@
+#include "relay.h"
+
+/**
+ * @file relay.cpp
+ * @brief RS485继电器控制模块实现
+ * @details 实现5区1号继电器的控制功能
+ *
+ * 命令格式说明：
+ * - 地址码: 0x1A 0x2B 0x3C 0x4D
+ * - 长度码: 0x09或0x0B
+ * - 功能码: 0x91(开) 0x96(关) 0x90(闪)
+ * - 校验码: 最后一字节为校验和
+ */
+
+/**
+ * @brief 打开继电器(5区1号)
+ * @details 发送继电器开启命令到RS485总线
+ *          命令: [0x1A,0x2B,0x3C,0x4D,0x09,0x00,0x91,0x01,0xD9]
+ * @return void
+ */
+void Relay5_on(void)
+{
+  /* 继电器开启命令数据包 */
+  uint8_t sendData[] = {0x1A, 0x2B, 0x3C, 0x4D, 0x09, 0x00, 0x91, 0x01, 0xD9};
+  int len = sizeof(sendData);
+
+  /* 通过RS485发送命令 */
+  RS485_SER.write(sendData, len);
+}
+
+/**
+ * @brief 关闭继电器(5区1号)
+ * @details 发送继电器关闭命令到RS485总线
+ *          命令: [0x1A,0x2B,0x3C,0x4D,0x09,0x00,0x96,0x01,0xDE]
+ * @return void
+ */
+void Relay5_off(void)
+{
+  /* 继电器关闭命令数据包 */
+  uint8_t sendData[] = {0x1A, 0x2B, 0x3C, 0x4D, 0x09, 0x00, 0x96, 0x01, 0xDE};
+  int len = sizeof(sendData);
+
+  /* 通过RS485发送命令 */
+  RS485_SER.write(sendData, len);
+}
+
+/**
+ * @brief 继电器频闪控制(5区1号)
+ * @details 发送继电器频闪命令到RS485总线
+ *          命令: [0x1A,0x2B,0x3C,0x4D,0x0B,0x00,0x90,0x01,0x00,0x0A,0xD0]
+ * @return void
+ */
+void Relay5_blink(void)
+{
+  /* 继电器频闪命令数据包 */
+  uint8_t sendData[] = {0x1A, 0x2B, 0x3C, 0x4D, 0x0B, 0x00, 0x90, 0x01, 0x00, 0x0A, 0xD0};
+  int len = sizeof(sendData);
+
+  /* 通过RS485发送命令 */
+  RS485_SER.write(sendData, len);
+}

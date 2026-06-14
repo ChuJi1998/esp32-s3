@@ -1,46 +1,56 @@
+ 协议说明：
+  ============================================
+ *
+ *数据帧格式：
+ *[起始符(4)] [帧长度(1)] [板地址(1)] [指令字(1)] [数据域(n)] [预留位(0-4)] [校验(1)]
+ *0x1A 0x2B    0x3C      0x4D        0x09      0x00      0x91      0x01        无        校验
+ *
+  支持的指令：
+  - 0x90: 单路继电器频闪
+  - 0x91: 单路继电器吸合(打开)
+  - 0x96: 单路继电器断开(关闭)   
+  - 0x98: 查询单路继电器状态
+  - 0x99: 查询所有继电器状态
+  
+  校验计算：从起始符第一个字节到数据域最后一个字节逐字节异或(XOR)
+  
+  ============================================
+  
+  命令示例：
+ *
+ *1. 打开继电器(5区1号)：
+    1A 2B 3C 4D 09 00 91 01 D9
+     - 帧长度: 0x09 (9字节)
+     - 板地址: 0x00 (0号板)
+     - 指令字: 0x91 (吸合)
+     - 继电器号: 0x01 (1号)
+     - 校验: 0xD9
+  
+  2. 关闭继电器(5区1号)：
+     -1A 2B 3C 4D 09 00 96 01 DE
+     - 指令字: 0x96 (断开)
+  
+  3. 频闪(1秒)：
+     1A 2B 3C 4D 0B 00 90 01 00 0A D0
+     - 帧长度: 0x0B (11字节)
+     - 指令字: 0x90 (频闪)
+     - 频闪时间: 0x00 0x0A (10 x 100ms = 1秒)
+  
+  ============================================
 
-This directory is intended for project specific (private) libraries.
-PlatformIO will compile them to static libraries and link into the executable file.
-
-The source code of each library should be placed in a separate directory
-("lib/your_library_name/[Code]").
-
-For example, see the structure of the following example libraries `Foo` and `Bar`:
-
-|--lib
-|  |
-|  |--Bar
-|  |  |--docs
-|  |  |--examples
-|  |  |--src
-|  |     |- Bar.c
-|  |     |- Bar.h
-|  |  |- library.json (optional. for custom build options, etc) https://docs.platformio.org/page/librarymanager/config.html
-|  |
-|  |--Foo
-|  |  |- Foo.c
-|  |  |- Foo.h
-|  |
-|  |- README --> THIS FILE
-|
-|- platformio.ini
-|--src
-   |- main.c
-
-Example contents of `src/main.c` using Foo and Bar:
-```
-#include <Foo.h>
-#include <Bar.h>
-
-int main (void)
-{
-  ...
-}
-
-```
-
-The PlatformIO Library Dependency Finder will find automatically dependent
-libraries by scanning project source files.
-
-More information about PlatformIO Library Dependency Finder
-- https://docs.platformio.org/page/librarymanager/ldf.html
+ 波特率：9600 bps
+  数据位：8
+  停止位：1
+  校验位：无
+  流控：无
+  
+  RS485通信协议：
+  - 起始符：0x1A 0x2B 0x3C 0x4D (4字节固定值)
+  - 帧长度：1字节，表示从板地址到数据域最后一个字节的长度（不包括起始符和校验）
+  - 板地址：1字节，表示目标板的地址（0-255）
+  - 指令字：1字节，表示要执行的操作（如打开、关闭、查询等）
+  - 数据域：n字节，根据指令不同可能包含继电器号、频闪时间等参数
+  - 预留位：0-4字节，根据需要可用于扩展功能，目前未使用
+  - 校验：1字节，从起始符第一个字节到数据域最后一个字节逐字节异或(XOR)得到的校验值
+ 
+ 
