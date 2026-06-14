@@ -8,8 +8,6 @@
 #include "Haredware/relay.h"
 #include "Haredware/oled.h"
 
-#define DEMO_DELAY 10000
-
 void setup(void)
 {
   setup_RS485();
@@ -20,21 +18,5 @@ void setup(void)
 
 void loop(void)
 {
-
-  oled_showText("Relay5 ON");
-  Relay5_on();
-  delay(DEMO_DELAY);
-
-  oled_showText("Relay5 OFF");
-  Relay5_off();
-  delay(DEMO_DELAY);
-
-  oled_showText("Relay5 BLINK");
-  Relay5_blink();
-  delay(DEMO_DELAY);
-
-  oled_showText("Relay5 Stop Blink");
-  Relay5_off();
-  delay(DEMO_DELAY);
-
+ 
 }
