@@ -7,4 +7,4 @@
 
 void setup_RS485(void);
 
-#endif /* RS485_H */
+#endif
