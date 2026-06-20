@@ -18,5 +18,5 @@ void setup(void)
 
 void loop(void)
 {
- 
+ oled_showText("Hello, World!");
 }

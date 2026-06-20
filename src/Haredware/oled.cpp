@@ -35,7 +35,7 @@ void setup_OLED(void)
 void oled_showText(const char *text)
 {
   display.clearDisplay();                 // 清除显示缓冲区
-  display.setTextSize(2);                 // 设置文本大小为2倍
+  display.setTextSize(1);                 // 设置文本大小为1倍
   display.setTextColor(SSD1306_WHITE);    // 设置文本颜色为白色
   display.setCursor(0, 0);               // 设置文本起始位置
   display.println(text);                  // 将文本写入显示缓冲区
