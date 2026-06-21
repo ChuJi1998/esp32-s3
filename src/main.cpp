@@ -4,11 +4,11 @@
 #include "Adafruit_SSD1306.h"
 #include "HardwareSerial.h"
 
-#include "Haredware/rs485.h"
-#include "Haredware/relay.h"
-#include "Haredware/oled.h"
-#include "Haredware/wifi_handler.h"
-#include "Haredware/web_server.h"
+#include "rs485.h"
+#include "relay.h"
+#include "oled.h"
+#include "wifi_handler.h"
+#include "web_server.h"
 
 void setup(void)
 {
