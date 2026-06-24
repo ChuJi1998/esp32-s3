@@ -5,21 +5,18 @@
 #include "Adafruit_SSD1306.h"
 #include "HardwareSerial.h"
 
-#include "rs485.h"
 #include "oled.h"
 
+/* ── RS485 串口对象定义（UART1） ── */
+HardwareSerial RS485_SER(1);
+
 /**
- * @file relay.cpp
- * @brief RS485继电器控制模块实现（12路继电器）
- * @details 实现1~12号继电器的开启、关闭、频闪控制
- *
- * 命令格式说明：
- * - 起始符: 0x1A 0x2B 0x3C 0x4D
- * - 帧长度: 0x09(开关) / 0x0B(频闪)
- * - 板地址: 0x00
- * - 功能码: 0x91(开) 0x96(关) 0x90(闪)
- * - 校验码: 从起始符到数据域末逐字节异或(XOR)
+ * @brief 初始化 RS485（UART1: 9600bps, RX=GPIO17, TX=GPIO16）
  */
+void setup_RS485(void)
+{
+  RS485_SER.begin(9600, SERIAL_8N1, 17, 16);
+}
 
 /* ── 数据帧常量 ── */
 #define STX1 0x1A

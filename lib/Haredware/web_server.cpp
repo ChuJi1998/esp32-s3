@@ -28,7 +28,7 @@ static const RelayFunc relayBlink[12] = {
 };
 
 /* ════════════════════════════════════════════
-   HTML 页面（优美的 Web 控制界面）
+   HTML 页面
    ════════════════════════════════════════════ */
 static const char HTML_PAGE[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>

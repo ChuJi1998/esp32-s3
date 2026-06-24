@@ -16,8 +16,11 @@
  * 校验: 从起始符到数据域末逐字节异或(XOR)
  */
 
-/* 外部引用全局RS485串口对象（由main.cpp定义） */
-extern HardwareSerial RS485_SER;  //extern声明，表示该对象在其他文件中定义
+/* 外部引用全局RS485串口对象（由relay.cpp定义） */
+extern HardwareSerial RS485_SER;
+
+/* RS485初始化（UART1: 9600, RX=GPIO17, TX=GPIO16） */
+void setup_RS485(void);
 
 /* ── Relay 1 ── */
 void Relay1_on(void);
