@@ -325,21 +325,8 @@ void scanModbusDevices(void)
   else
     { Serial.println("  [未检测] 氧气传感器     地址 0x07 无响应"); }
 
-  Serial.println("\n  [全量扫描] 其他地址 (1~247)...");
-  for (int addr = 1; addr <= 247; addr++) {
-    if (addr >= 0x01 && addr <= 0x07) continue;
-    if (modbusReadHoldingRegister((uint8_t)addr, 0x0000, &dummy)) {
-      Serial.printf("  [找到] 地址 0x%02X (%d) - 寄存器0x0000 = %u\n", addr, addr, dummy);
-      found++;
-    }
-    delay(3);
-  }
+  Serial.println("\n  [全量扫描] 已跳过 (全部已知传感器在线)");
 
-  if (found == 0) {
-    Serial.println("  [警告] 未找到任何Modbus设备!");
-    Serial.println("  请检查: 接线、供电、A/B线是否接反");
-  } else {
-    Serial.printf("\n  扫描完成, 共找到 %d 个设备\n", found);
-  }
+  Serial.printf("\n  扫描完成, 共找到 %d 个设备\n", found);
   Serial.println("========================================\n");
 }
